@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { signIn } from "next-auth/react";
 
 export function LoginCard() {
   return (
@@ -34,9 +35,14 @@ export function LoginCard() {
         </form>
       </div>
       <div className="my-5 h-[1px] w-full bg-gray-600"></div>
-      <div className="h-11 flex justify-center items-center text-white border rounded-md border-emerald-400 w-full">
+      <button
+        onClick={() => {
+          signIn("google");
+        }}
+        className="h-11 flex justify-center items-center text-white border rounded-md border-emerald-400 w-full"
+      >
         Login with Google
-      </div>
+      </button>
     </div>
   );
 }

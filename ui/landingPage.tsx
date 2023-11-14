@@ -12,16 +12,10 @@ const LandingPage = () => {
           <div className="text-emerald-400 font-bold">brushes.</div>
         </h1>
         <Link
-          href="/login"
-          className="flex justify-center items-center border rounded-full hover:bg-emerald-400 hover:text-black h-12 text-white border-emerald-400 w-36 my-2 hover:border-0"
+          href="/home"
+          className="flex justify-center items-center border rounded-lg hover:bg-emerald-400 hover:text-black h-12 text-white border-emerald-400 w-36 my-2 hover:border-0"
         >
-          Login
-        </Link>
-        <Link
-          href="/signup"
-          className="flex justify-center items-center border rounded-full hover:bg-white hover:text-black hover:border-0 h-12 text-white border-purple-400 w-36 my-2"
-        >
-          Sign Up
+          Get Started
         </Link>
       </div>
       <div className="flex justify-center items-center h-full w-1/2">
