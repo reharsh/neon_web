@@ -1,17 +1,22 @@
 import React from "react";
 import Image from "next/image";
+import { ModeToggle } from "./modetoggle";
 
 const Nav = () => {
   return (
-    <div className="h-16 flex justify-between items-center text-white">
-      <div className="flex items-center rounded-xl border h-full md:w-[600px] border-black">
+    <div className="h-16 flex justify-center mt-3 items-center">
+      <div className="flex items-center justify-between rounded-xl border h-full sm:w-[600px] dark:border-gray-700">
         <Image
           src="/logo.png"
           width={150}
           height={50}
           alt="The logo of Doodle Fusion."
-          className="pl-11"
+          className="pl-4"
         />
+
+        <div className="pr-4">
+          <ModeToggle></ModeToggle>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center bg-black p-6">
+    <div className="flex flex-col md:flex-row justify-center items-center h-screen bg-black p-6">
       <div className="flex flex-col justify-center items-center h-full w-1/2 pb-24">
         <h1 className="text-white text-5xl text-center my-20 font-medium">
           <div className=" text-purple-400 font-bold">Discover</div> colors with

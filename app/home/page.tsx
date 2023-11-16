@@ -3,7 +3,7 @@ import HomeComponent from "@/ui/home";
 
 const Home = () => {
   return (
-    <div className="flex justify-center h-screen w-screen overflow-hidden bg-black p-5">
+    <div className="flex justify-center items-center h-screen w-screen overflow-hidden p-5">
       <HomeComponent></HomeComponent>
     </div>
   );

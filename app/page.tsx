@@ -4,7 +4,7 @@ import NavBar from "@/ui/navbar";
 
 export default function Home() {
   return (
-    <main className="bg-black w-screen h-screen md:overflow-hidden">
+    <main className="w-screen h-screen md:overflow-hidden">
       <NavBar />
       <LandingPage />
     </main>

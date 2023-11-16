@@ -9,7 +9,10 @@ export default function HomeComponent() {
   if (session) {
     return (
       <>
-        <Dashboard></Dashboard>
+        <Dashboard
+          email={session.user?.email!}
+          name={session.user?.name!}
+        ></Dashboard>
       </>
     );
   }

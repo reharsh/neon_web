@@ -28,7 +28,7 @@ export function LoginCard() {
               alert("the button is clicked!!.");
             }}
             type="submit"
-            className="h-11 flex justify-center items-center bg-white mt-10 rounded-md w-full"
+            className="h-11 flex justify-center items-center bg-white text-black mt-10 rounded-md w-full"
           >
             Login with Email
           </button>
