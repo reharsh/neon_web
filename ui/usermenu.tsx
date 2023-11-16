@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ExitIcon } from "@radix-ui/react-icons";
@@ -24,16 +25,16 @@ const UserMenu = ({ user }: { user: UserProps }) => {
         className="rounded-xl w-40 aspect-square"
       />
       <button
-        onClick={async () => {}}
+        onClick={async () => {
+          signOut();
+          console.log("signed out");
+        }}
         className="rounded-lg mt-4 h-9 w-36 hover:bg-white hover:text-black border hover:border-emerald-400"
       >
         My Profile
       </button>
       <Button
-        onClick={async () => {
-          signOut();
-          console.log("signed out");
-        }}
+        onClick={async () => {}}
         className="rounded-lg mt-4 bg-black h-9 w-36 hover:bg-white hover:text-black border hover:border-emerald-400"
       >
         <ExitIcon></ExitIcon> <span className="pl-2">Log out</span>
