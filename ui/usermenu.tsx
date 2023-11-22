@@ -15,7 +15,7 @@ interface UserProps {
 
 const UserMenu = ({ user }: { user: UserProps }) => {
   return (
-    <div className="flex flex-col sm:w-1/4 pl-4 h-full justify-center items-center">
+    <div className="flex flex-col sm:w-1/4 pl-4 mt-16 sm:mt-0 h-full justify-center items-center">
       <div className="text-xl mb-3 font-bold">
         Welcome, <span>{user && user.name}</span>
       </div>
@@ -25,16 +25,15 @@ const UserMenu = ({ user }: { user: UserProps }) => {
         className="rounded-xl w-40 aspect-square"
       />
       <button
-        onClick={async () => {
-          signOut();
-          console.log("signed out");
-        }}
+        onClick={async () => {}}
         className="rounded-lg mt-4 h-9 w-36 hover:bg-white hover:text-black border hover:border-emerald-400"
       >
         My Profile
       </button>
       <Button
-        onClick={async () => {}}
+        onClick={async () => {
+          signOut();
+        }}
         className="rounded-lg mt-4 bg-black h-9 w-36 hover:bg-white hover:text-black border hover:border-emerald-400"
       >
         <ExitIcon></ExitIcon> <span className="pl-2">Log out</span>

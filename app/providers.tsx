@@ -1,11 +1,14 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
+import { RecoilRoot } from "recoil";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider>
-      <body suppressHydrationWarning={true}>{children}</body>
+      <RecoilRoot>
+        <body suppressHydrationWarning={true}>{children}</body>
+      </RecoilRoot>
     </SessionProvider>
   );
 };

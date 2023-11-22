@@ -9,17 +9,37 @@ generator client {
 }
 
 model User {
-  id           Int    @id
-  name         String @db.VarChar(255)
-  username     String @unique
-  password     String @db.VarChar(255)
-  email        String @db.VarChar(255)
-  profileImage String @db.VarChar(255)
-  rank Int @unique
-  Canvas Canvas[]
+  userId       Int      @id @default(autoincrement())
+  name         String   @db.VarChar(255)
+  password     String   @db.VarChar(255)
+  email        String   @unique @db.VarChar(255)
+  profileImage String   @db.VarChar(255)
+  role         Role     @default(USER)
+  canvas       Canvas[]
+}
+
+enum Role {
+  USER
+  PAINTER
+  GUESSER
+}
+
+model Chat {
+  chatId     Int      @id @default(autoincrement())
+  senderId   Int
+  receiverId Int
+  createdAt  DateTime @default(now())
+  message    String
+  canvasId   Int
+  canvas     Canvas   @relation(fields: [canvasId], references: [canvasId])
 }
 
 model Canvas {
-  canvasId Int  @id
-  users  User[]
+  canvasId      Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  title         String   @db.VarChar(255)
+  score         Int      @default(0)
+  numberOfUsers Int
+  user          User[]
+  chats         Chat[]
 }

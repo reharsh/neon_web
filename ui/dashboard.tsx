@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "./nav";
 import UserMenu from "./usermenu";
 import { Separator } from "@radix-ui/react-separator";
+import Canvases from "./canvases";
 
 interface UserProps {
   id: number;
@@ -24,13 +25,17 @@ const Dashboard = ({ email, name }: { email: string; name: string }) => {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
           email: email.toLowerCase(),
-          name: name.toLowerCase().split(" ")[0],
+          name: name,
         }),
       });
-      const result = await res.json();
-      console.log(result);
-      setUser(result);
-      setIsLoading(false);
+      if (res) {
+        const result = await res.json();
+        console.log(result);
+        setUser(result);
+        setIsLoading(false);
+      } else {
+        console.log("User Not Found!!");
+      }
     }
     getUser();
   }, []);
@@ -40,9 +45,10 @@ const Dashboard = ({ email, name }: { email: string; name: string }) => {
   return (
     <div className="flex flex-col w-screen h-screen">
       <Nav></Nav>
-      <div className="flex w-full h-full">
+      <div className="flex sm:flex-row flex-col w-full h-full">
         <UserMenu user={user!} />
         <Separator decorative orientation="vertical" />
+        <Canvases></Canvases>
       </div>
     </div>
   );

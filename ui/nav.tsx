@@ -5,7 +5,7 @@ import { ModeToggle } from "./modetoggle";
 const Nav = () => {
   return (
     <div className="h-16 flex justify-center mt-3 items-center">
-      <div className="flex items-center justify-between rounded-xl border h-full sm:w-[600px] dark:border-gray-700">
+      <div className="flex items-center justify-between rounded-xl border h-full sm:mx-0 mx-2 w-[600px] dark:border-gray-700">
         <Image
           src="/logo.png"
           width={150}
