@@ -10,3 +10,11 @@ type DrawLineProps = Draw & {
 };
 
 type Point = { x: number; y: number };
+
+interface UserProps {
+  name: string;
+  email: string;
+  password: string;
+  profileImage: string;
+  role: string;
+}

@@ -1,7 +1,9 @@
 //@ts-nocheck
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
+import { useSearchParams } from "next/navigation";
 import {
+  canvasState,
   strokeSizeState,
   strokeColorState,
   downloadImageState,
@@ -25,21 +27,30 @@ function Sketch3() {
   const [isUndo, setIsUndo] = useRecoilState(isUndoState);
   const [isRedo, setIsRedo] = useRecoilState(isRedoState);
   const { canvasRef, onMouseDown } = useDraw(createLine);
+  const [canvasIDState, setCanvasId] = useRecoilState(canvasState);
+  const searchParams = useSearchParams();
+  const canvasId = searchParams.get("canvasId");
 
   function createLine({ prevPoint, currentPoint, context }: Draw) {
-    socket.emit("draw-line", { prevPoint, currentPoint, color });
+    socket.emit(
+      "draw-line",
+      { prevPoint, currentPoint, color, size },
+      canvasId
+    );
     drawLine({ prevPoint, currentPoint, context, color, size });
   }
 
   useEffect(() => {
     const context = canvasRef.current?.getContext("2d");
 
-    socket.emit("Client Ready!!");
+    console.log("drawing: ", canvasId);
+
+    socket.emit("client-ready", canvasId);
 
     socket.on("get-canvas-state", () => {
       if (!canvasRef.current?.toDataURL()) return;
       console.log("sending canvas state");
-      socket.emit("canvas-state", canvasRef.current.toDataURL());
+      socket.emit("canvas-state", canvasRef.current.toDataURL(), canvasId);
     });
 
     socket.on("canvas-state-from-server", (state: string) => {
@@ -53,7 +64,7 @@ function Sketch3() {
 
     socket.on(
       "draw-line",
-      ({ prevPoint, currentPoint, color }: DrawLineProps) => {
+      ({ prevPoint, currentPoint, color, size }: DrawLineProps) => {
         if (!context) return console.log("no ctx here");
         drawLine({ prevPoint, currentPoint, context, color, size });
       }
@@ -64,7 +75,7 @@ function Sketch3() {
       socket.off("get-canvas-state");
       socket.off("canvas-state-from-server");
     };
-  }, [canvasRef]);
+  }, [canvasRef, canvasId]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

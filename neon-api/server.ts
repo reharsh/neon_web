@@ -19,21 +19,40 @@ type DrawLineProps = {
   size: number;
 };
 
+interface CanvasState {
+  [canvasId: string]: string; // Map canvasId to its state (e.g., image data)
+}
+
+//TODO: CORRECT THE CONNECTION
+
+const canvasStates: CanvasState = {}; // Store canvas states
+
 io.on("connection", (socket) => {
   console.log("conected!!!!");
-  socket.on("client-ready", () => {
-    socket.broadcast.emit("get-canvas-state");
+  socket.on("client-ready", (canvasId: string) => {
+    console.log("hellooooo: ", canvasId);
+    socket.join(canvasId);
+    socket.broadcast.to(canvasId).emit("get-canvas-state");
+    if (canvasStates[canvasId]) {
+      socket.emit("canvas-state-from-server", canvasStates[canvasId]);
+    }
   });
 
-  socket.on("canvas-state", (state) => {
-    console.log("received canvas state");
-    socket.broadcast.emit("canvas-state-from-server", state);
+  socket.on("canvas-state", (state, canvasId: string) => {
+    console.log("received canvas state for canvas ID: ", canvasId);
+    canvasStates[canvasId] = state;
+    socket
+      .to(canvasId)
+      .emit("canvas-state-from-server", canvasStates[canvasId]);
   });
 
   socket.on(
     "draw-line",
-    ({ prevPoint, currentPoint, color, size }: DrawLineProps) => {
-      socket.broadcast.emit("draw-line", {
+    (
+      { prevPoint, currentPoint, color, size }: DrawLineProps,
+      canvasId: string
+    ) => {
+      socket.to(canvasId).emit("draw-line", {
         prevPoint,
         currentPoint,
         color,

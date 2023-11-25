@@ -17,6 +17,12 @@ const LandingPage = () => {
         >
           Get Started
         </Link>
+        <Link
+          href="/signup"
+          className="flex justify-center items-center border rounded-lg hover:bg-purple-400 hover:text-black h-12 text-white border-purple-400 w-36 my-2 hover:border-0"
+        >
+          Sign Up
+        </Link>
       </div>
       <div className="flex justify-center items-center h-full w-1/2">
         <Image

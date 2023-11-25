@@ -3,20 +3,21 @@ import Nav from "./nav";
 import UserMenu from "./usermenu";
 import { Separator } from "@radix-ui/react-separator";
 import Canvases from "./canvases";
-
-interface UserProps {
-  id: number;
-  name: string;
-  email: string;
-  usernames: string;
-  rank: number;
-  profileImage: string;
-}
+import { useRecoilState } from "recoil";
+import { userState } from "@/atoms/states";
 
 //TODO: Fix the name thingy and account creation
 
-const Dashboard = ({ email, name }: { email: string; name: string }) => {
-  const [user, setUser] = useState<UserProps>();
+const Dashboard = ({
+  email,
+  name,
+  profileImage,
+}: {
+  email: string;
+  name: string;
+  profileImage: string | null | undefined;
+}) => {
+  const [user, setUser] = useRecoilState(userState);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function getUser() {
@@ -26,6 +27,7 @@ const Dashboard = ({ email, name }: { email: string; name: string }) => {
         body: JSON.stringify({
           email: email.toLowerCase(),
           name: name,
+          profileImage: profileImage,
         }),
       });
       if (res) {
@@ -46,7 +48,7 @@ const Dashboard = ({ email, name }: { email: string; name: string }) => {
     <div className="flex flex-col w-screen h-screen">
       <Nav></Nav>
       <div className="flex sm:flex-row flex-col w-full h-full">
-        <UserMenu user={user!} />
+        <UserMenu user={user} />
         <Separator decorative orientation="vertical" />
         <Canvases></Canvases>
       </div>
