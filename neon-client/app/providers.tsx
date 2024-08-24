@@ -7,7 +7,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider>
       <RecoilRoot>
-        <body suppressHydrationWarning={true}>{children}</body>
+        <div suppressHydrationWarning>{children}</div>
       </RecoilRoot>
     </SessionProvider>
   );

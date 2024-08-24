@@ -18,29 +18,38 @@ const Dashboard = ({
   profileImage: string | null | undefined;
 }) => {
   const [user, setUser] = useRecoilState(userState);
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function getUser() {
-      const res = await fetch("http://localhost:3000/api/user", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: email.toLowerCase(),
-          name: name,
-          profileImage: profileImage,
-        }),
-      });
-      if (res) {
-        const result = await res.json();
-        console.log(result);
-        setUser(result);
-        setIsLoading(false);
-      } else {
-        console.log("User Not Found!!");
+      try {
+        const res = await fetch("http://localhost:3000/api/user", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            email: email.toLowerCase(),
+            name: name,
+            profileImage: profileImage,
+          }),
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          console.log(result);
+          setUser(result);
+          setIsLoading(false);
+        } else {
+          console.log("User Not Found!!");
+          setIsLoading(false); // Update the loading state even if the user is not found
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setIsLoading(false); // Update loading state in case of an error
       }
     }
     getUser();
   }, []);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }

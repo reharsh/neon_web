@@ -38,7 +38,7 @@ export default function HomeComponent() {
     userValue.profileImage === tempUser.profileImage &&
     userValue.role === tempUser.role;
 
-  if (!isUserValueEqualTempUser) {
+  if (true) {
     return (
       <div className="flex justify-center items-center h-screen w-screen overflow-hidden p-5">
         <Dashboard

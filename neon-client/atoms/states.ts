@@ -23,6 +23,17 @@ export const userState = atom<UserProps>({
   },
 });
 
+export const userState2 = atom<UserProps>({
+  key: "userState2",
+  default: {
+    name: "",
+    email: "",
+    password: "",
+    profileImage: "",
+    role: "USER",
+  },
+});
+
 export const actionState = atom({ key: "actionState", default: false });
 export const actionLoginState = atom({
   key: "actionLoginState",
